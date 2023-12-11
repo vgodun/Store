@@ -23,6 +23,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { AlertModal } from "@/components/modals/alert-modal"
 import ApiAlert from "@/components/ui/api-alert"
+import { Heading } from "@/components/ui/heading"
 
 const formSchema = z.object({
     name: z.string().min(2),
@@ -85,6 +86,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
                 loading={loading}
             />
             <div className="flex items-center justify-between">
+                <Heading title="Store settings" description="Manage store preferences" />
                 <Button
                     disabled={loading}
                     variant="destructive"
