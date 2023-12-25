@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 
 import { SizeForm } from "./components/size-form";
 
-const SIzePage = async ({
+const SizePage = async ({
   params
 }: {
   params: { sizeId: string }
@@ -22,4 +22,4 @@ const SIzePage = async ({
   );
 }
 
-export default SIzePage;
+export default SizePage;
