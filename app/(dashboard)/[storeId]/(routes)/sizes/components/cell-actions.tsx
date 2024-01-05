@@ -6,12 +6,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useParams, useRouter } from "next/navigation";
-import { SizesColumn } from "./columns";
+import { SizeColumn } from "./columns";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 interface CellActionProps {
-    data: SizesColumn;
+    data: SizeColumn;
 }
 
 export const CellAction = ({ data }: CellActionProps) => {
