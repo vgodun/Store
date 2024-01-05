@@ -1,17 +1,17 @@
 import { format } from "date-fns";
 
 import prismadb from "@/lib/prismadb";
-
-import { ProductColumn } from "./components/columns"
-import  ProductClient  from "./components/client";
 import { formatter } from "@/lib/utils";
+
+import { ProductsClient } from "./components/client";
+import { ProductColumn } from "./components/columns";
 
 const ProductsPage = async ({
   params
 }: {
   params: { storeId: string }
 }) => {
-  const produscts = await prismadb.product.findMany({
+  const products = await prismadb.product.findMany({
     where: {
       storeId: params.storeId
     },
@@ -25,7 +25,7 @@ const ProductsPage = async ({
     }
   });
 
-  const formattedProducts: ProductColumn[] = produscts.map((item) => ({
+  const formattedProducts: ProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,
     isFeatured: item.isFeatured,
@@ -40,7 +40,7 @@ const ProductsPage = async ({
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <ProductClient data={formattedProducts} />
+        <ProductsClient data={formattedProducts} />
       </div>
     </div>
   );

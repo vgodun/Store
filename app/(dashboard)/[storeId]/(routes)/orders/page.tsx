@@ -1,10 +1,11 @@
 import { format } from "date-fns";
 
 import prismadb from "@/lib/prismadb";
+import { formatter } from "@/lib/utils";
 
 import { OrderColumn } from "./components/columns"
-import  OrderClient  from "./components/client";
-import { formatter } from "@/lib/utils";
+import { OrderClient } from "./components/client";
+
 
 const OrdersPage = async ({
   params
@@ -31,10 +32,10 @@ const OrdersPage = async ({
     id: item.id,
     phone: item.phone,
     address: item.address,
-    products:item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
-    totalPrice: formatter.format(item.orderItems.reduce((total, item) =>{
+    products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
+    totalPrice: formatter.format(item.orderItems.reduce((total, item) => {
       return total + Number(item.product.price)
-    },0)),
+    }, 0)),
     isPaid: item.isPaid,
     createdAt: format(item.createdAt, 'MMMM do, yyyy'),
   }));

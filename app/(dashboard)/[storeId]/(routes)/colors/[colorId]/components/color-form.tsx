@@ -25,10 +25,10 @@ import { Heading } from "@/components/ui/heading"
 import { AlertModal } from "@/components/modals/alert-modal"
 
 const formSchema = z.object({
-  name: z.string().min(1),
-  value: z.string().min(4).regex(/^#/, {
+  name: z.string().min(2),
+  value: z.string().min(4).max(9).regex(/^#/, {
     message: 'String must be a valid hex code'
-  })
+  }),
 });
 
 type ColorFormValues = z.infer<typeof formSchema>
@@ -54,8 +54,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
   const form = useForm<ColorFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
-      name: '',
-      value: ''
+      name: ''
     }
   });
 
@@ -67,8 +66,8 @@ export const ColorForm: React.FC<ColorFormProps> = ({
       } else {
         await axios.post(`/api/${params.storeId}/colors`, data);
       }
-      router.push(`/${params.storeId}/colors`);
       router.refresh();
+      router.push(`/${params.storeId}/colors`);
       toast.success(toastMessage);
     } catch (error: any) {
       toast.error('Something went wrong.');
@@ -81,8 +80,8 @@ export const ColorForm: React.FC<ColorFormProps> = ({
     try {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/colors/${params.colorId}`);
-      router.push(`/${params.storeId}/colors`);
       router.refresh();
+      router.push(`/${params.storeId}/colors`);
       toast.success('Color deleted.');
     } catch (error: any) {
       toast.error('Make sure you removed all products using this color first.');
@@ -94,13 +93,13 @@ export const ColorForm: React.FC<ColorFormProps> = ({
 
   return (
     <>
-      <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onDelete}
-        loading={loading}
-      />
-      <div className="flex items-center justify-between">
+    <AlertModal 
+      isOpen={open} 
+      onClose={() => setOpen(false)}
+      onConfirm={onDelete}
+      loading={loading}
+    />
+     <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -137,11 +136,11 @@ export const ColorForm: React.FC<ColorFormProps> = ({
                 <FormItem>
                   <FormLabel>Value</FormLabel>
                   <FormControl>
-                    <div className="flex item-center gap-x-4">
+                    <div className="flex items-center gap-x-4">
                       <Input disabled={loading} placeholder="Color value" {...field} />
                       <div 
-                      className="border p-4 rounded-full"
-                      style={{ backgroundColor: field.value }}
+                        className="border p-4 rounded-full" 
+                        style={{ backgroundColor: field.value }}
                       />
                     </div>
                   </FormControl>

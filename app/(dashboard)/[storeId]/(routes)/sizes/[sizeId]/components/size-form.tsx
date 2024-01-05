@@ -52,8 +52,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
   const form = useForm<SizeFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
-      name: '',
-      value: ''
+      name: ''
     }
   });
 
@@ -65,8 +64,8 @@ export const SizeForm: React.FC<SizeFormProps> = ({
       } else {
         await axios.post(`/api/${params.storeId}/sizes`, data);
       }
-      router.push(`/${params.storeId}/sizes`);
       router.refresh();
+      router.push(`/${params.storeId}/sizes`);
       toast.success(toastMessage);
     } catch (error: any) {
       toast.error('Something went wrong.');
