@@ -10,7 +10,7 @@ const HomePage = async () => {
     const products = await getProducts({
         isFeatured: true,
     });
-    const billboard = await getBillboard('5b67d3ce-9d4e-416b-88b6-2d1bc8955171');
+    const billboard = await getBillboard('3d19c906-3cdb-4671-b06c-93817e34cb48');
     return (
         <Container>
             <div className="space-y-10 pb-10">
